@@ -3,24 +3,39 @@
     --card-bg: #ffffff;
     --text-primary: #1e293b;
     --text-secondary: #64748b;
-    --accent: #d97706; /* Amber-600 */
+    --accent: #d97706;
+    /* Amber-600 */
     --accent-hover: #b45309;
     --border: #e2e8f0;
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* Dark Theme - applied via media query OR data attribute override */
 @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme-override="light"]) {
         --bg-color: #0f172a;
         --card-bg: #1e293b;
         --text-primary: #f1f5f9;
         --text-secondary: #94a3b8;
-        --accent: #fbbf24; /* Amber-400 */
+        --accent: #fbbf24;
+        /* Amber-400 */
         --accent-hover: #f59e0b;
         --border: #334155;
         --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5);
     }
+}
+
+:root[data-theme-override="dark"] {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --accent: #fbbf24;
+    /* Amber-400 */
+    --accent-hover: #f59e0b;
+    --border: #334155;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5);
 }
 
 * {
@@ -37,29 +52,51 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll; /* Prevent layout shift */
+    overflow-y: scroll;
+    /* Prevent layout shift */
 }
 
 /* --- Layout --- */
 
-nav, footer {
+nav,
+footer {
     padding: 1rem 1.5rem;
     display: flex;
-    justify-content: center; /* Center nav items */
+    justify-content: center;
+    /* Center nav items */
     gap: 1.5rem;
     font-size: 0.9em;
 }
 
-nav a, footer a {
+nav a,
+footer a {
     color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s;
     font-weight: 500;
 }
 
-nav a:hover, footer a:hover,
-nav a.active, footer a.active {
+nav a:hover,
+footer a:hover,
+nav a.active,
+footer a.active {
     color: var(--accent);
+}
+
+.theme-select {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.theme-select:focus {
+    outline: none;
+    border-color: var(--accent);
 }
 
 main {
@@ -101,7 +138,8 @@ main {
     font-weight: 700;
     margin-bottom: 1.5rem;
     color: var(--text-primary);
-    min-height: 3.5rem; /* reduce layout shift */
+    min-height: 3.5rem;
+    /* reduce layout shift */
 }
 
 .daily-reflection {
@@ -163,7 +201,8 @@ button.primary {
 
 button.primary:hover {
     background: var(--accent-hover);
-    color: white; /* Keep white on hover */
+    color: white;
+    /* Keep white on hover */
 }
 
 /* Utilities */
@@ -288,11 +327,11 @@ button.primary:hover {
     .card {
         padding: 1.5rem;
     }
-    
+
     .daily-text {
         font-size: 1.4rem;
     }
-    
+
     .meta-row {
         flex-direction: column;
         gap: 0.5rem;

@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Think About Wealth | Daily Wealth Thought</title>
-    <meta name="description" content="Daily stoic wealth thoughts and financial wisdom to reset your mindset. Resets at 00:00 UTC.">
+    <meta name="description"
+        content="Daily stoic wealth thoughts and financial wisdom to reset your mindset. Resets at 00:00 UTC.">
     <meta property="og:title" content="Think About Wealth">
     <meta property="og:description" content="Daily wealth wisdom, reset globally at UTC midnight.">
     <meta property="og:image" content="https://thinkaboutwealth.com/assets/og.svg">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    
+
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
     <nav>
         <a href="index.html" class="active">Today</a>
         <a href="archive.html">Archive</a>
         <a href="about.html">About</a>
+        <select id="theme-select" class="theme-select" aria-label="Theme">
+            <option value="system">System</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
     </nav>
 
     <main>
         <div id="daily-card" class="card">
-            
+
             <header class="site-title">Think About Wealth</header>
 
             <!-- Loading State -->
@@ -52,7 +60,7 @@
                     <button id="btn-yesterday" aria-label="Previous Day">Yesterday</button>
                     <button id="btn-today" class="primary hidden">Today</button>
                     <button id="btn-random">Random</button>
-                    <button id="btn-tomorrow" disabled title="Opens at UTC midnight">Tomorrow</button>
+                    <!-- Tomorrow button removed -->
                     <button id="btn-share" aria-label="Share this thought">Share</button>
                 </div>
             </div>
@@ -61,11 +69,11 @@
     </main>
 
     <footer>
-        <a href="https://github.com/thinkaboutwealth" target="_blank" rel="noopener">Open Source</a>
-        <span>&bull;</span>
-        <span>No Analytics &bull; UTC Reset</span>
+        <span>No ads. No tracking. Pure privacy.</span>
     </footer>
 
+    <script src="js/theme.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>

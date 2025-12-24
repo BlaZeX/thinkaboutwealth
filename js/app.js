@@ -15,20 +15,22 @@
  * 5. Memory: Intervals are cleared on page unload (good practice, though less critical for single page static).
  */
 
-(function() {
+(function () {
     'use strict';
 
     // State
     const CONFIG = {
         dataPath: './data/thoughts.json',
-        msPerDay: 86400000
+        msPerDay: 86400000,
+        // Start Date: Dec 24, 2025 00:00:00 UTC
+        startEpoch: Date.UTC(2025, 11, 24)
     };
 
     let state = {
         thoughts: [],
         viewMode: 'today', // 'today', 'yesterday', 'random'
         currentIdx: 0,     // The thought index currently displayed
-        utcDay: 0          // The true celestial UTC day number
+        dayNumber: 1       // The user-facing Day N
     };
 
     // DOM Elements
@@ -40,7 +42,7 @@
         countdown: document.getElementById('countdown'),
         btnThere: document.getElementById('btn-yesterday'),
         btnToday: document.getElementById('btn-today'),
-        btnNext: document.getElementById('btn-tomorrow'),
+        // btnNext removed
         btnRandom: document.getElementById('btn-random'),
         btnShare: document.getElementById('btn-share'),
         loading: document.getElementById('loading-state'),
@@ -51,8 +53,13 @@
 
     // --- Core Logic ---
 
-    function getUtcDay() {
-        return Math.floor(Date.now() / CONFIG.msPerDay);
+    function getDayNumber() {
+        const now = Date.now();
+        // If before start date, treat as Day 1
+        if (now < CONFIG.startEpoch) return 1;
+
+        const diff = now - CONFIG.startEpoch;
+        return Math.floor(diff / CONFIG.msPerDay) + 1;
     }
 
     function getSafeIndex(rawIndex, length) {
@@ -66,15 +73,18 @@
             const response = await fetch(CONFIG.dataPath);
             if (!response.ok) throw new Error('Failed to load thoughts');
             state.thoughts = await response.json();
-            
+
             if (!state.thoughts || state.thoughts.length === 0) {
                 throw new Error('No thoughts found');
             }
 
             // Calculate 'Today'
-            state.utcDay = getUtcDay();
-            const todayIdx = getSafeIndex(state.utcDay, state.thoughts.length);
-            
+            state.dayNumber = getDayNumber();
+
+            // Index is 0-based, Day is 1-based. 
+            // Thought for Day 1 is at index 0.
+            const todayIdx = getSafeIndex(state.dayNumber - 1, state.thoughts.length);
+
             // Set initial state
             state.currentIdx = todayIdx;
             state.viewMode = 'today';
@@ -97,16 +107,22 @@
         // Animate text change (mimic)
         elements.thoughtText.style.opacity = '0';
         elements.thoughtReflection.style.opacity = '0';
-        
+
         requestAnimationFrame(() => {
             // Update Text
-            elements.dayLabel.textContent = state.viewMode === 'random' 
-                ? 'Random Pick' 
-                : `Day ${state.currentIdx + 1}`; // 1-based day
-            
+            if (state.viewMode === 'random') {
+                elements.dayLabel.textContent = 'Random Pick';
+            } else {
+                // If we are in 'today' or 'yesterday' mode, we show Day N based on the index.
+                // However, the requirement is "Day N" where N = idx + 1.
+                // And we want consistency: Day 1 = Index 0.
+                // So text is always Index + 1.
+                elements.dayLabel.textContent = `Day ${state.currentIdx + 1}`;
+            }
+
             elements.thoughtText.textContent = thought.text;
             elements.thoughtReflection.textContent = thought.reflection;
-            
+
             // Fade in
             elements.thoughtText.style.transition = 'opacity 0.3s ease';
             elements.thoughtReflection.style.transition = 'opacity 0.3s ease 0.1s';
@@ -120,34 +136,35 @@
     function updateButtons() {
         // Today State
         if (state.viewMode === 'today') {
-            elements.btnToday.classList.add('hidden'); // Or disabled/active style
+            elements.btnToday.classList.add('hidden');
             elements.btnThere.disabled = false;
-            // Tomorrow is always disabled view, but contains countdown
             elements.btnRandom.disabled = false;
         } else {
             elements.btnToday.classList.remove('hidden');
         }
-
-        // Contextual disable
-        elements.btnNext.disabled = true; // Always disabled as a "view" button
     }
 
     // --- Actions ---
 
     function goYesterday() {
         state.viewMode = 'yesterday';
-        // Logic: Yesterday is simply (TodayIndex - 1) wrapped
-        // It's static relative to the day. 
-        // For a true "history", we might want (Current - 1), but requirements say:
-        // "Yesterday shows (utcDay-1) % length"
-        const todayIdx = getSafeIndex(state.utcDay, state.thoughts.length);
-        state.currentIdx = getSafeIndex(todayIdx - 1, state.thoughts.length);
+        // Yesterday relative to Today
+        // Today's index
+        const todayIdx = getSafeIndex(state.dayNumber - 1, state.thoughts.length);
+
+        // We just want to go back one from current? Or one from Today?
+        // Usually "Yesterday" button implies "Show me yesterday's thought".
+        // If I click Yesterday twice?
+        // Let's implement it as: Toggle to Yesterday (Day N-1).
+
+        const yesterdayIdx = getSafeIndex(todayIdx - 1, state.thoughts.length);
+        state.currentIdx = yesterdayIdx;
         render();
     }
 
     function goToday() {
         state.viewMode = 'today';
-        state.currentIdx = getSafeIndex(state.utcDay, state.thoughts.length);
+        state.currentIdx = getSafeIndex(state.dayNumber - 1, state.thoughts.length);
         render();
     }
 
@@ -162,7 +179,7 @@
     async function shareThought() {
         const thought = state.thoughts[state.currentIdx];
         const text = `Day ${state.currentIdx + 1} — ${thought.text} — ThinkAboutWealth.com`;
-        
+
         if (navigator.share) {
             try {
                 await navigator.share({
@@ -199,16 +216,16 @@
             now.getUTCDate() + 1,
             0, 0, 0
         ));
-        
+
         let diff = nextMidnight - now;
-        
+
         // Handle New Day
         if (diff <= 0) {
             diff = 0;
-            const newUtcDay = getUtcDay();
-            if (newUtcDay > state.utcDay) {
+            const newDayNum = getDayNumber();
+            if (newDayNum > state.dayNumber) {
                 // Day changed! Refresh.
-                state.utcDay = newUtcDay;
+                state.dayNumber = newDayNum;
                 if (state.viewMode === 'today') {
                     goToday();
                 }
@@ -254,7 +271,7 @@
         toast.className = 'toast';
         toast.textContent = msg;
         document.body.appendChild(toast);
-        
+
         // Trigger reflow
         toast.offsetHeight;
         toast.classList.add('show');
