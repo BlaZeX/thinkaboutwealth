@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#1e293b"/>
+  <rect x="50" y="50" width="1100" height="530" rx="30" stroke="#fbbf24" stroke-width="10" fill="none" opacity="0.3"/>
+  <text x="600" y="250" font-family="system-ui, -apple-system, sans-serif" font-size="80" font-weight="bold" fill="#f8fafc" text-anchor="middle">ThinkAboutWealth.com</text>
+  <text x="600" y="380" font-family="system-ui, -apple-system, sans-serif" font-size="48" fill="#cbd5e1" text-anchor="middle">Daily Wealth Thoughts &amp; Stoic Reflections</text>
+  <path d="M570 450 L630 450 L600 500 Z" fill="#fbbf24"/>
+</svg>

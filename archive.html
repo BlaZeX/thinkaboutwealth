@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive | Think About Wealth</title>
+    <meta name="description" content="Browse all daily wealth thoughts and stoic reflections.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html">Today</a>
+        <a href="archive.html" class="active">Archive</a>
+        <a href="about.html">About</a>
+    </nav>
+
+    <main>
+        <div class="archive-container">
+            <header class="site-title" style="text-align:center; margin-bottom:2rem;">Thought Archive</header>
+
+            <div class="search-bar">
+                <input type="text" id="search-input" class="search-input" placeholder="Search text or reflection...">
+                <div id="tag-filters" class="tag-filters">
+                    <!-- Javascript populates this -->
+                </div>
+                <div id="archive-count" style="font-size:0.85rem; color:var(--text-secondary); text-align:right;">
+                    Loading...</div>
+            </div>
+
+            <div id="loading-state" style="text-align:center; margin-top:2rem;">Loading...</div>
+
+            <div id="error-state" class="hidden error" style="text-align:center; margin-top:2rem;">
+                Failed to load archive.
+            </div>
+
+            <div id="archive-grid" class="archive-grid">
+                <!-- Data populated here -->
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <a href="https://github.com/thinkaboutwealth" target="_blank" rel="noopener">Open Source</a>
+        <span>&bull;</span>
+        <span>No Analytics &bull; UTC Reset</span>
+    </footer>
+
+    <script src="js/archive.js"></script>
+</body>
+
+</html>
