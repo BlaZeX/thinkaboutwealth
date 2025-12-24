@@ -27,30 +27,32 @@
     }
 
     function updateSelector(theme) {
-        const select = document.getElementById('theme-select');
-        if (select) select.value = theme;
+        // Toggle active class on buttons
+        document.querySelectorAll('.theme-opt').forEach(btn => {
+            if (btn.dataset.theme === theme) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
     }
 
     // Init
     const savedTheme = getTheme();
     applyTheme(savedTheme);
 
-    // Listen for system changes if system mode
+    // Listen for system changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        if (getTheme() === 'system') {
-            applyTheme('system');
-        }
+        if (getTheme() === 'system') applyTheme('system');
     });
 
-    // Wait for DOM to wire up selector
+    // Wire up buttons
     window.addEventListener('DOMContentLoaded', () => {
-        const select = document.getElementById('theme-select');
-        if (select) {
-            select.value = savedTheme;
-            select.addEventListener('change', (e) => {
-                setTheme(e.target.value);
+        updateSelector(savedTheme);
+
+        document.querySelectorAll('.theme-opt').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const theme = btn.dataset.theme;
+                setTheme(theme);
             });
-        }
+        });
     });
 
     // Expose for debugging if needed

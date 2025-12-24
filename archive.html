@@ -15,17 +15,32 @@
     <nav>
         <a href="index.html">Today</a>
         <a href="archive.html" class="active">Archive</a>
-        <a href="about.html">About</a>
-        <select id="theme-select" class="theme-select" aria-label="Theme">
-            <option value="system">System</option>
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-        </select>
+
+        <div class="theme-toggle">
+            <button class="theme-opt" data-theme="system" aria-label="System Theme" title="System">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44a1 1 0 0 1-.96 0L3.53 17.38A1 1 0 0 1 3 16.5V7.5c0-.38.21-.71.53-.88l7.9-4.44a1 1 0 0 1 .96 0l7.9 4.44c.32.17.53.5.53.88v9zM12 4.15L6.04 7.5 12 10.85l5.96-3.35L12 4.15zM5 8.68v6.64L10.99 18.7V12.03L5 8.68zm14 6.64V8.68l-5.99 3.35V18.7l5.99-3.38z" />
+                </svg>
+            </button>
+            <button class="theme-opt" data-theme="light" aria-label="Light Theme" title="Light">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000 1.41.996.996 0 001.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06z" />
+                </svg>
+            </button>
+            <button class="theme-opt" data-theme="dark" aria-label="Dark Theme" title="Dark">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M11.57 2.3c.21.57.04 1.22-.41 1.6-2.22 1.86-3.72 4.56-3.72 8.1 0 5.52 4.48 10 10 10 3.33 0 6.28-1.57 8.28-4.04.38-.46.96-.5 1.39-.23.12.08.33.24.23.5C25.9 22.95 21.08 26 16.5 26c-6.63 0-12-5.37-12-12 0-4.66 2.89-8.73 7.07-10.74.24-.12.43.02.5.14z" />
+                </svg>
+            </button>
+        </div>
     </nav>
 
     <main>
         <div class="archive-container">
-            <header class="site-title" style="text-align:center; margin-bottom:2rem;">Thought Archive</header>
+            <img src="assets/logo.svg" alt="Think About Wealth" class="logo">
 
             <div class="search-bar">
                 <input type="text" id="search-input" class="search-input" placeholder="Search text or reflection...">
