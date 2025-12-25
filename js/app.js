@@ -22,8 +22,9 @@
     const CONFIG = {
         dataPath: './data/thoughts.json',
         msPerDay: 86400000,
-        // Start Date: Dec 24, 2025 00:00:00 UTC
-        startEpoch: Date.UTC(2025, 11, 24)
+        // Start Date: Dec 20, 2025 00:00:00 UTC (Day 1)
+        // TODO: Change to Jan 1, 2026 for production launch
+        startEpoch: Date.UTC(2025, 11, 20)
     };
 
     let state = {
