@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Think About Wealth | Daily Wealth Thought</title>
+    <title>Think About Wealth - One Thought Per Day</title>
     <meta name="description"
         content="Daily stoic wealth thoughts and financial wisdom to reset your mindset. Resets at 00:00 UTC.">
     <meta property="og:title" content="Think About Wealth">
-    <meta property="og:description" content="Daily wealth wisdom, reset globally at UTC midnight.">
+    <meta property="og:description"
+        content="One short thought about wealth, updated daily. Calm, private, and meant to be read once a day.">
     <meta property="og:image" content="https://thinkaboutwealth.com/assets/og.svg">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -48,37 +49,38 @@
     <main>
         <div id="daily-card" class="card">
 
-            <header class="site-title">Think About Wealth</header>
+            <header class="site-title">
+                <h1>Think About Wealth</h1>/header>
 
-            <!-- Loading State -->
-            <div id="loading-state">
-                <p>Loading thought...</p>
-            </div>
-
-            <!-- Error State -->
-            <div id="error-state" class="hidden">
-                <p class="error">Unable to load thought.</p>
-                <button id="btn-retry" style="margin-top:1rem;">Retry</button>
-            </div>
-
-            <!-- Content -->
-            <div id="content-state" class="hidden">
-                <p id="thought-text" class="daily-text">Loading...</p>
-                <p id="thought-reflection" class="daily-reflection">...</p>
-
-                <div class="meta-row">
-                    <span id="day-label">Day --</span>
-                    <span id="countdown">Next thought in --:--:--</span>
+                <!-- Loading State -->
+                <div id="loading-state">
+                    <p>Loading thought...</p>
                 </div>
 
-                <div class="btn-group">
-                    <button id="btn-yesterday" aria-label="Previous Day">Yesterday</button>
-                    <button id="btn-today" class="primary hidden">Today</button>
-                    <button id="btn-random">Random</button>
-                    <!-- Tomorrow button removed -->
-                    <button id="btn-share" aria-label="Share this thought">Share</button>
+                <!-- Error State -->
+                <div id="error-state" class="hidden">
+                    <p class="error">Unable to load thought.</p>
+                    <button id="btn-retry" style="margin-top:1rem;">Retry</button>
                 </div>
-            </div>
+
+                <!-- Content -->
+                <div id="content-state" class="hidden">
+                    <p id="thought-text" class="daily-text">Loading...</p>
+                    <p id="thought-reflection" class="daily-reflection">...</p>
+
+                    <div class="meta-row">
+                        <span id="day-label">Day --</span>
+                        <span id="countdown">Next thought in --:--:--</span>
+                    </div>
+
+                    <div class="btn-group">
+                        <button id="btn-yesterday" aria-label="Previous Day">Yesterday</button>
+                        <button id="btn-today" class="primary hidden">Today</button>
+                        <button id="btn-random">Random</button>
+                        <!-- Tomorrow button removed -->
+                        <button id="btn-share" aria-label="Share this thought">Share</button>
+                    </div>
+                </div>
 
         </div>
     </main>
