@@ -24,7 +24,7 @@
         msPerDay: 86400000,
         // Start Date: Dec 20, 2025 00:00:00 UTC (Day 1)
         // TODO: Change to Jan 1, 2026 for production launch
-        startEpoch: Date.UTC(2025, 11, 20)
+        startEpoch: Date.UTC(2026, 0, 1)
     };
 
     let state = {
