@@ -50,37 +50,38 @@
         <div id="daily-card" class="card">
 
             <header class="site-title">
-                <h1>Think About Wealth</h1>/header>
+                <h1>Think About Wealth</h1>
+            </header>
 
-                <!-- Loading State -->
-                <div id="loading-state">
-                    <p>Loading thought...</p>
+            <!-- Loading State -->
+            <div id="loading-state">
+                <p>Loading thought...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-state" class="hidden">
+                <p class="error">Unable to load thought.</p>
+                <button id="btn-retry" style="margin-top:1rem;">Retry</button>
+            </div>
+
+            <!-- Content -->
+            <div id="content-state" class="hidden">
+                <p id="thought-text" class="daily-text">Loading...</p>
+                <p id="thought-reflection" class="daily-reflection">...</p>
+
+                <div class="meta-row">
+                    <span id="day-label">Day --</span>
+                    <span id="countdown">Next thought in --:--:--</span>
                 </div>
 
-                <!-- Error State -->
-                <div id="error-state" class="hidden">
-                    <p class="error">Unable to load thought.</p>
-                    <button id="btn-retry" style="margin-top:1rem;">Retry</button>
+                <div class="btn-group">
+                    <button id="btn-yesterday" aria-label="Previous Day">Yesterday</button>
+                    <button id="btn-today" class="primary hidden">Today</button>
+                    <button id="btn-random">Random</button>
+                    <!-- Tomorrow button removed -->
+                    <button id="btn-share" aria-label="Share this thought">Share</button>
                 </div>
-
-                <!-- Content -->
-                <div id="content-state" class="hidden">
-                    <p id="thought-text" class="daily-text">Loading...</p>
-                    <p id="thought-reflection" class="daily-reflection">...</p>
-
-                    <div class="meta-row">
-                        <span id="day-label">Day --</span>
-                        <span id="countdown">Next thought in --:--:--</span>
-                    </div>
-
-                    <div class="btn-group">
-                        <button id="btn-yesterday" aria-label="Previous Day">Yesterday</button>
-                        <button id="btn-today" class="primary hidden">Today</button>
-                        <button id="btn-random">Random</button>
-                        <!-- Tomorrow button removed -->
-                        <button id="btn-share" aria-label="Share this thought">Share</button>
-                    </div>
-                </div>
+            </div>
 
         </div>
     </main>
